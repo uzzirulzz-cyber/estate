@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String
+  // SALE | RENTAL | PROJECT
+  listingType     String
+  // APARTMENT | HOUSE | VILLA | TOWNHOUSE | PENTHOUSE | DUPLEX | COMMERCIAL | LAND
+  propertyType    String
+  // AVAILABLE | SOLD | RENTED | OFF_MARKET
+  status          String   @default("AVAILABLE")
+  price           Float
+  monthlyRent     Float?
+  // Project-only fields
+  projectProgress Int?
+  expectedCompletion String?
+
+  address         String
+  city            String
+  state           String
+  zipCode         String
+  bedrooms        Int
+  bathrooms       Float
+  area            Float    // sqft
+  yearBuilt       Int?
+  imageUrl        String
+  gallery         String?  // comma-separated urls
+  features        String?  // comma-separated features
+  featured        Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  transactions    Transaction[]
+  auditLogs       AuditLog[]
+}
+
+model Transaction {
+  id               String   @id @default(cuid())
+  propertyId       String
+  property         Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  // SALE | RENTAL
+  type             String
+  buyerName        String
+  sellerName       String
+  agentName        String
+  amount           Float    // total deal amount
+  commissionRate   Float    // percentage e.g. 3
+  commissionAmount Float
+  taxRate          Float    // percentage e.g. 5
+  taxAmount        Float
+  netRevenue       Float    // amount - commission - tax (agency profit basis)
+  profit           Float    // commissionAmount - costs (estimated)
+  saleDate         DateTime @default(now())
+  status           String   @default("COMPLETED") // COMPLETED | PENDING | CANCELLED
+  paymentMethod    String   @default("BANK_TRANSFER")
+  notes            String?
+  createdAt        DateTime @default(now())
+
+  taxRecord        TaxRecord?
+  auditLogs        AuditLog[]
+}
+
+model TaxRecord {
+  id            String      @id @default(cuid())
+  transactionId String      @unique
+  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  fiscalYear    Int
+  taxRate       Float
+  taxableAmount Float
+  taxAmount     Float
+  status        String      @default("PENDING") // PENDING | PAID
+  paidDate      DateTime?
+  createdAt     DateTime    @default(now())
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  action      String   // CREATE | UPDATE | DELETE | SALE | TAX_PAID etc.
+  entity      String   // PROPERTY | TRANSACTION | TAX
+  entityId    String
+  property    Property? @relation(fields: [propertyId], references: [id], onDelete: SetNull)
+  propertyId  String?
+  transaction Transaction? @relation(fields: [transactionId], references: [id], onDelete: SetNull)
+  transactionId String?
+  performedBy String   @default("admin@esterra.io")
+  details     String
+  timestamp   DateTime @default(now())
+}
