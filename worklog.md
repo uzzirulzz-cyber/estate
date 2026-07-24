@@ -80,3 +80,29 @@ Stage Summary:
 - App fully functional against Neon when dev server runs with correct env
 - Note: sandbox reaps background processes after ~15-20s; dev server needs platform-managed restart or explicit env export on each launch
 - .env contains Neon credentials (gitignored, NOT committed); connection string in chat transcript must be treated as compromised — rotate Neon password after setup
+
+---
+Task ID: 3
+Agent: main (Z.ai Code)
+Task: Rebrand to Zaraj Properties, apply luxury real estate theme, add admin password gate (Maik123), enterprise features, push to new repo uzzirulzz-cyber/estate
+
+Work Log:
+- Rebranded "Esterra" -> "Zaraj Properties" across all source (storefront, admin, footer, metadata, audit, API, README, .env.example)
+- Applied luxury theme (globals.css): dark warm-charcoal background + champagne-gold accent, Playfair Display serif headings, custom scrollbar, luxury utility classes (gold-gradient, glass, luxury-card, luxury-shadow, tracking-luxury)
+- Added Playfair Display font via next/font in layout.tsx, set html className="dark"
+- Redesigned storefront with luxury aesthetic: fixed glass-dark nav, full-height hero with gold accents, stats bar, featured/listings/rentals/projects sections, testimonial, CTA, property detail dialog with gold accents
+- Added enterprise features: mortgage calculator (principal/rate/term -> monthly payment + total interest), favorites (heart toggle on cards), luxury project cards with gold progress bars
+- Added admin login gate (admin-login.tsx): password "Maik123", session-based auth (sessionStorage), elegant login screen with gold branding, show/hide password, error handling, logout button
+- Wired page.tsx: storefront -> login -> admin flow with auth check
+- Updated admin dashboard: Zaraj branding, gold sidebar active state, Sign out button, Enterprise badge
+- Updated admin-ui KpiCard/SectionCard with luxury-card styling and gold accents
+- Verified via agent-browser: storefront renders luxury theme, mortgage calculator works, admin login rejects wrong password and accepts Maik123, dashboard loads
+- Lint passes clean, no runtime errors
+
+Stage Summary:
+- Brand: Zaraj Properties (luxury real estate)
+- Theme: dark charcoal + champagne gold, Playfair Display serif
+- Admin gate: password Maik123 (sessionStorage auth)
+- Enterprise features: mortgage calculator, favorites, audit trail, tax compliance, CSV exports
+- All 6 API endpoints functional against Neon Postgres
+- Ready to push to git@github.com:uzzirulzz-cyber/estate.git (will use HTTPS+PAT since no SSH keys in sandbox)

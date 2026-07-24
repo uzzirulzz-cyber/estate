@@ -16,15 +16,15 @@ export function KpiCard({
   sub?: string
 }) {
   const accentMap: Record<string, string> = {
-    emerald: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
-    amber: 'bg-amber-500/10 text-amber-600 dark:text-amber-400',
-    rose: 'bg-rose-500/10 text-rose-600 dark:text-rose-400',
-    sky: 'bg-sky-500/10 text-sky-600 dark:text-sky-400',
-    violet: 'bg-violet-500/10 text-violet-600 dark:text-violet-400',
-    zinc: 'bg-zinc-500/10 text-zinc-600 dark:text-zinc-400',
+    emerald: 'bg-gold/10 text-gold',
+    amber: 'bg-amber-400/10 text-amber-300',
+    rose: 'bg-rose-400/10 text-rose-300',
+    sky: 'bg-sky-400/10 text-sky-300',
+    violet: 'bg-violet-400/10 text-violet-300',
+    zinc: 'bg-zinc-400/10 text-zinc-300',
   }
   return (
-    <Card className="p-5">
+    <Card className="luxury-card p-5">
       <div className="flex items-start justify-between">
         <div className={cn('flex h-10 w-10 items-center justify-center rounded-xl', accentMap[accent])}>
           <Icon className="h-5 w-5" />
@@ -32,14 +32,14 @@ export function KpiCard({
         {delta && (
           <span className={cn(
             'flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold',
-            deltaPositive ? 'bg-emerald-500/10 text-emerald-600' : 'bg-rose-500/10 text-rose-600',
+            deltaPositive ? 'bg-gold/10 text-gold' : 'bg-rose-400/10 text-rose-300',
           )}>
             {deltaPositive ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
             {delta}
           </span>
         )}
       </div>
-      <div className="mt-4 text-2xl font-bold tracking-tight">{value}</div>
+      <div className="mt-4 font-serif text-2xl font-bold tracking-tight text-white">{value}</div>
       <div className="text-sm text-muted-foreground">{label}</div>
       {sub && <div className="mt-1 text-xs text-muted-foreground/80">{sub}</div>}
     </Card>
@@ -56,11 +56,11 @@ export function SectionCard({
   className?: string
 }) {
   return (
-    <Card className={cn('p-5', className)}>
+    <Card className={cn('luxury-card p-5', className)}>
       {(title || action) && (
         <div className="mb-4 flex items-start justify-between gap-2">
           <div>
-            {title && <h3 className="font-semibold">{title}</h3>}
+            {title && <h3 className="font-serif font-semibold text-white">{title}</h3>}
             {desc && <p className="text-sm text-muted-foreground">{desc}</p>}
           </div>
           {action}

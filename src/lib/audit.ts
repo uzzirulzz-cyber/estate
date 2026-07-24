@@ -27,7 +27,7 @@ export async function logAudit(params: {
         entity: params.entity,
         entityId: params.entityId,
         details: params.details,
-        performedBy: params.performedBy ?? 'admin@esterra.io',
+        performedBy: params.performedBy ?? 'admin@zaraj.io',
         propertyId: params.propertyId,
         transactionId: params.transactionId,
       },

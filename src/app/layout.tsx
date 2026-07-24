@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -13,18 +13,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
-  title: "Esterra — Real Estate Marketplace & Admin Console",
-  description: "Buy, rent and invest in premium properties. Full-stack real estate platform with storefront, ongoing projects, sales, revenue, profit, audit and tax management.",
-  keywords: ["real estate", "properties for sale", "rentals", "ongoing projects", "property management", "admin dashboard"],
-  authors: [{ name: "Esterra" }],
+  title: "Zaraj Properties — Luxury Real Estate",
+  description: "Zaraj Properties — a premium real estate marketplace for buying, renting and investing in luxury properties. Exclusive listings, off-plan projects, and a full enterprise admin console.",
+  keywords: ["Zaraj Properties", "luxury real estate", "properties for sale", "rentals", "ongoing projects", "property management"],
+  authors: [{ name: "Zaraj Properties" }],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },
   openGraph: {
-    title: "Esterra — Real Estate Marketplace",
+    title: "Zaraj Properties — Luxury Real Estate",
     description: "Premium properties for sale, rentals and off-plan projects.",
-    siteName: "Esterra",
+    siteName: "Zaraj Properties",
     type: "website",
   },
 };
@@ -35,9 +42,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased bg-background text-foreground`}
       >
         {children}
         <Toaster />

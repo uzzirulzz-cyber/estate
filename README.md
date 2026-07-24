@@ -1,4 +1,4 @@
-# Esterra — Real Estate Marketplace & Admin Console
+# Zaraj Properties — Real Estate Marketplace & Admin Console
 
 A full-stack real estate platform with a public storefront (properties for sale, rentals, ongoing projects) and a backend admin console (sales, revenue, profit, audit trail, tax & compliance).
 

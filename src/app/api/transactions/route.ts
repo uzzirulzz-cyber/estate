@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
         type,
         buyerName: body.buyerName || '—',
         sellerName: body.sellerName || property.sellerName || 'Property Owner',
-        agentName: body.agentName || 'Esterra Agent',
+        agentName: body.agentName || 'Zaraj Agent',
         amount: saleAmount,
         commissionRate,
         commissionAmount,
@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
       entityId: tx.id,
       transactionId: tx.id,
       propertyId,
-      performedBy: (body.agentName || 'admin').toLowerCase().replace(/\s+/g, '.') + '@esterra.io',
+      performedBy: (body.agentName || 'admin').toLowerCase().replace(/\s+/g, '.') + '@zaraj.io',
       details: `${type} of "${property.title}" for $${saleAmount.toLocaleString()} (${tx.status})`,
     })
 
