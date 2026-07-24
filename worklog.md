@@ -106,3 +106,35 @@ Stage Summary:
 - Enterprise features: mortgage calculator, favorites, audit trail, tax compliance, CSV exports
 - All 6 API endpoints functional against Neon Postgres
 - Ready to push to git@github.com:uzzirulzz-cyber/estate.git (will use HTTPS+PAT since no SSH keys in sandbox)
+
+---
+Task ID: 4
+Agent: main (Z.ai Code)
+Task: Switch Zaraj Properties from PostgreSQL (Neon) to MongoDB (Atlas), ensure zero operational failures
+
+Work Log:
+- Updated .env: DATABASE_URL -> MongoDB Atlas (mongodb+srv://bixby:***@cluster0.5piuwvi.mongodb.net/zaraj)
+- Rewrote prisma/schema.prisma: provider postgresql -> mongodb, added @db.ObjectId on all id + foreign-key fields, @map("_id") for native Mongo IDs
+- Ran bun run db:generate (regenerated Prisma client for MongoDB)
+- Ran bun run db:push -> created 4 collections (Property, Transaction, TaxRecord, AuditLog) + unique indexes on Property.slug and TaxRecord.transactionId
+- Ran seed script -> 10 properties, 9 transactions, 9 tax records, 22 audit logs on MongoDB
+- Restarted dev server with cleared .next cache
+- Full end-to-end operational verification via agent-browser + API:
+  * Storefront renders (luxury theme, no console errors)
+  * Admin login: wrong password rejected, Maik123 accepted
+  * Property upload (Add property form): "MongoDB Test - Pearl Penthouse" created successfully, appears in admin table AND storefront
+  * Transaction recording: API POST created transaction with auto-calc commission ($55,500), tax ($92,500), profit ($36,075)
+  * Tax marking: PATCH marked pending tax record as PAID
+  * Audit trail: captured CREATE(11), SALE(8), UPDATE(3), RENTAL(2), TAX_PAID(1) actions
+  * Property deletion: DELETE removed test property cleanly
+- All 6 API endpoints return HTTP 200 with MongoDB data
+- Zero console errors, zero page errors, zero upload failures
+- Updated .env.example to show MongoDB connection format
+- Lint passes clean
+
+Stage Summary:
+- Database: MongoDB Atlas (Cluster0, db: zaraj) — fully operational
+- Schema: Prisma + MongoDB with @db.ObjectId for native relations
+- All CRUD operations verified: create/read/update/delete properties, transactions, tax records
+- Admin login gate functional (password Maik123)
+- No operational errors — login, upload, and all features work end-to-end
