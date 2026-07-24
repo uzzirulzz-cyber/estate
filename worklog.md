@@ -138,3 +138,37 @@ Stage Summary:
 - All CRUD operations verified: create/read/update/delete properties, transactions, tax records
 - Admin login gate functional (password Maik123)
 - No operational errors — login, upload, and all features work end-to-end
+
+---
+Task ID: 5
+Agent: main (Z.ai Code)
+Task: Fix "products fail to upload" on live deployed site playbeattv.buzz (Vercel + MongoDB)
+
+Work Log:
+- Diagnosed via Vercel API: estate project connected to playbeattv.buzz (verified=True)
+- Found root cause #1: Vercel had env var "Mongodb_URL" (wrong name, empty value) instead of "DATABASE_URL"
+  -> Added correct DATABASE_URL env var (MongoDB Atlas connection) to production + preview targets
+- Found root cause #2 (the real blocker): Vercel build did NOT run "prisma generate"
+  -> Deployed Prisma client was the stale PostgreSQL version (provider="postgresql")
+  -> With a MongoDB DATABASE_URL, Prisma threw: "the URL must start with the protocol postgresql://"
+  -> All API calls returned HTTP 500 (empty body) -> property upload failed
+- Added diagnostic try/catch to GET /api/properties to surface the error in the 500 response
+  -> Confirmed exact Prisma error message from live deployment
+- Fix: added "postinstall": "prisma generate" AND "prisma generate &&" to build script in package.json
+  -> Now Vercel regenerates the Prisma client with the mongodb schema on every build
+- Deployed via git push to estate repo (auto-triggers Vercel deployment)
+- Verified live site end-to-end:
+  * playbeattv.buzz/ -> HTTP 200 (luxury storefront renders, 10 properties)
+  * playbeattv.buzz/api/properties -> HTTP 200 (10 properties from MongoDB)
+  * playbeattv.buzz/api/properties POST -> 201 (property upload WORKS - created test property)
+  * playbeattv.buzz/api/properties/[id] DELETE -> 200 (cleanup works)
+  * All 6 API endpoints -> HTTP 200
+  * Admin login with Maik123 -> dashboard loads on live site
+- Cleaned up diagnostic code path (kept the try/catch as good practice)
+
+Stage Summary:
+- playbeattv.buzz is fully operational: storefront + admin panel + property upload all work
+- Root cause was missing "prisma generate" in the Vercel build pipeline (stale PostgreSQL client)
+- Fix: postinstall + build scripts now run "prisma generate" so MongoDB client is built on every deploy
+- DATABASE_URL env var correctly configured in Vercel for production + preview
+- All 6 API endpoints return 200 on live site, 10 properties loading from MongoDB Atlas
