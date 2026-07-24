@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import {
   LayoutDashboard, Building2, ReceiptText, TrendingUp, ScrollText,
-  Gem, Menu, X, ArrowLeft, LogOut, ShieldCheck, Users, Target,
+  Menu, X, ArrowLeft, LogOut, ShieldCheck, Users, Target,
   Calendar, Landmark, CreditCard, MapPin, Bell, FileText, Hammer,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -68,10 +68,10 @@ export function AdminDashboard({ onExit }: { onExit: () => void }) {
         mobileOpen ? 'translate-x-0' : '-translate-x-full',
       )}>
         <div className="sticky top-0 z-10 flex h-16 items-center gap-3 border-b border-gold/10 bg-sidebar px-5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg gold-gradient text-black"><Gem className="h-4 w-4" /></div>
+          <img src="/propertyatlas-logo.png" alt="PropertyAtlas" className="h-10 w-10 rounded-lg object-contain" />
           <div className="leading-none">
-            <div className="font-serif text-sm font-bold tracking-wide-luxury text-white">ZARAJ</div>
-            <div className="text-[9px] uppercase tracking-luxury text-gold">Admin Console</div>
+            <div className="font-serif text-sm font-bold tracking-wide-luxury text-white">PropertyAtlas</div>
+            <div className="text-[9px] uppercase tracking-luxury text-gold">Lifestyle · Admin</div>
           </div>
           <button className="ml-auto rounded-md p-1.5 text-muted-foreground hover:bg-muted lg:hidden" onClick={() => setMobileOpen(false)} aria-label="Close menu"><X className="h-4 w-4" /></button>
         </div>
@@ -98,10 +98,10 @@ export function AdminDashboard({ onExit }: { onExit: () => void }) {
           <div className="mt-auto space-y-2 pt-4">
             <div className="rounded-lg border border-gold/15 bg-gold/5 p-3">
               <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/30 bg-gold/10 text-xs font-semibold text-gold">ZA</div>
+                <div className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/30 bg-gold/10 text-xs font-semibold text-gold">PA</div>
                 <div className="min-w-0">
-                  <div className="truncate text-sm font-medium text-white">Zaraj Admin</div>
-                  <div className="truncate text-xs text-muted-foreground">admin@zaraj.io</div>
+                  <div className="truncate text-sm font-medium text-white">PropertyAtlas Admin</div>
+                  <div className="truncate text-xs text-muted-foreground">admin@propertyatlas.lifestyle</div>
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Gem, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
+import { Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, MessageCircle } from 'lucide-react'
 import { Providers } from '@/components/providers'
 import { Storefront } from '@/components/storefront/storefront'
 import { AdminDashboard } from '@/components/admin/admin-dashboard'
@@ -46,18 +46,22 @@ function Footer({ onEnterAdmin }: { onEnterAdmin: () => void }) {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg gold-gradient text-black">
-                <Gem className="h-5 w-5" />
-              </div>
+              <img src="/propertyatlas-logo.png" alt="PropertyAtlas" className="h-12 w-12 rounded-lg object-contain" />
               <div className="leading-none">
-                <div className="font-serif text-lg font-bold tracking-wide-luxury text-white">ZARAJ</div>
-                <div className="text-[9px] uppercase tracking-luxury text-gold">Properties</div>
+                <div className="font-serif text-lg font-bold tracking-wide-luxury text-white">PropertyAtlas</div>
+                <div className="text-[9px] uppercase tracking-luxury text-gold">Lifestyle</div>
               </div>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-zinc-400">
-              A premier luxury real estate platform for buying, renting and investing in exceptional properties.
+              PropertyAtlas.lifestyle — a premier luxury real estate platform for buying, renting and investing in exceptional properties.
             </p>
             <div className="mt-5 flex gap-2">
+              <a href="https://wa.me/923318333368" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 transition hover:border-emerald-500/60 hover:text-emerald-300" aria-label="WhatsApp">
+                <MessageCircle className="h-4 w-4" />
+              </a>
+              <a href="mailto:playbeatdigital@proton.me" className="flex h-9 w-9 items-center justify-center rounded-lg border border-gold/15 bg-gold/5 text-zinc-400 transition hover:border-gold/40 hover:text-gold" aria-label="Email">
+                <Mail className="h-4 w-4" />
+              </a>
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
                 <a
                   key={i}
@@ -98,15 +102,15 @@ function Footer({ onEnterAdmin }: { onEnterAdmin: () => void }) {
           <div>
             <h4 className="font-serif text-sm font-semibold uppercase tracking-wide-luxury text-gold">Contact</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
-              <li className="flex items-center gap-2.5 text-zinc-400"><Phone className="h-4 w-4 text-gold" /> +1 (800) 555-0199</li>
-              <li className="flex items-center gap-2.5 text-zinc-400"><Mail className="h-4 w-4 text-gold" /> hello@zaraj.io</li>
-              <li className="flex items-start gap-2.5 text-zinc-400"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> 250 Market Street, Suite 400, San Francisco, CA</li>
+              <li><a href="https://wa.me/923318333368" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 text-zinc-400 transition hover:text-emerald-400"><MessageCircle className="h-4 w-4 text-emerald-400" /> +92 331 8333368</a></li>
+              <li><a href="mailto:playbeatdigital@proton.me" className="flex items-center gap-2.5 text-zinc-400 transition hover:text-gold"><Mail className="h-4 w-4 text-gold" /> playbeatdigital@proton.me</a></li>
+              <li className="flex items-start gap-2.5 text-zinc-400"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> F-7 Markaz, Islamabad, Pakistan</li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-gold/10 pt-6 text-xs text-zinc-500 sm:flex-row">
-          <p>© {new Date().getFullYear()} Zaraj Properties. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} PropertyAtlas.lifestyle. All rights reserved.</p>
           <div className="flex gap-5">
             <a href="#" className="transition hover:text-gold">Privacy Policy</a>
             <a href="#" className="transition hover:text-gold">Terms of Service</a>

@@ -170,7 +170,7 @@ async function main() {
         entity: 'PROPERTY',
         entityId: created.id,
         propertyId: created.id,
-        performedBy: 'system@zaraj.io',
+        performedBy: 'system@propertyatlas.lifestyle',
         details: `Property "${created.title}" listed (${created.listingType}) in ${created.city}, ${created.state}`,
       },
     })
@@ -243,7 +243,7 @@ async function main() {
         entityId: tx.id,
         transactionId: tx.id,
         propertyId: prop.id,
-        performedBy: t.data.agent.toLowerCase().replace(' ', '.') + '@zaraj.io',
+        performedBy: t.data.agent.toLowerCase().replace(' ', '.') + '@propertyatlas.lifestyle',
         details: `${t.type} of "${prop.title}" for PKR ${saleAmount.toLocaleString()} (${t.status})`,
       },
     })
@@ -266,7 +266,7 @@ async function main() {
         entity: 'PROPERTY',
         entityId: p.id,
         propertyId: p.id,
-        performedBy: 'admin@zaraj.io',
+        performedBy: 'admin@propertyatlas.lifestyle',
         details: `Updated pricing details for "${p.title}" (${p.city})`,
       },
     })
@@ -274,12 +274,12 @@ async function main() {
 
   // ── AGENTS ──────────────────────────────────────────────
   const agents = [
-    { name: 'Ahmed Raza', email: 'ahmed.raza@zaraj.io', phone: '+92 300 1234567', whatsapp: '+92 300 1234567', licenseNumber: 'RLA-001', agency: 'Zaraj Properties', location: 'F-7, Islamabad', specialization: 'Luxury Homes', experience: 12, verified: true, rating: 4.9, commissionEarned: 9500000 },
-    { name: 'Fatima Sheikh', email: 'fatima.sheikh@zaraj.io', phone: '+92 301 2345678', whatsapp: '+92 301 2345678', licenseNumber: 'RLA-002', agency: 'Zaraj Properties', location: 'Bahria Town, Islamabad', specialization: 'Apartments', experience: 8, verified: true, rating: 4.8, commissionEarned: 6200000 },
-    { name: 'Bilal Khan', email: 'bilal.khan@zaraj.io', phone: '+92 302 3456789', whatsapp: '+92 302 3456789', licenseNumber: 'RLA-003', agency: 'Zaraj Properties', location: 'DHA, Islamabad', specialization: 'Commercial', experience: 10, verified: true, rating: 4.7, commissionEarned: 8100000 },
-    { name: 'Sana Malik', email: 'sana.malik@zaraj.io', phone: '+92 303 4567890', whatsapp: '+92 303 4567890', licenseNumber: 'RLA-004', agency: 'Zaraj Properties', location: 'F-11, Islamabad', specialization: 'Family Homes', experience: 6, verified: true, rating: 4.6, commissionEarned: 4300000 },
-    { name: 'Imran Qureshi', email: 'imran.qureshi@zaraj.io', phone: '+92 304 5678901', whatsapp: '+92 304 5678901', licenseNumber: 'RLA-005', agency: 'Zaraj Properties', location: 'Bani Gala, Islamabad', specialization: 'Villas', experience: 15, verified: false, rating: 4.5, commissionEarned: 5600000 },
-    { name: 'Zainab Ahmed', email: 'zainab.ahmed@zaraj.io', phone: '+92 305 6789012', whatsapp: '+92 305 6789012', licenseNumber: 'RLA-006', agency: 'Zaraj Properties', location: 'Gulberg Greens, Islamabad', specialization: 'Investment', experience: 9, verified: true, rating: 4.8, commissionEarned: 7200000 },
+    { name: 'Ahmed Raza', email: 'ahmed.raza@propertyatlas.lifestyle', phone: '+92 300 1234567', whatsapp: '+92 300 1234567', licenseNumber: 'RLA-001', agency: 'PropertyAtlas', location: 'F-7, Islamabad', specialization: 'Luxury Homes', experience: 12, verified: true, rating: 4.9, commissionEarned: 9500000 },
+    { name: 'Fatima Sheikh', email: 'fatima.sheikh@propertyatlas.lifestyle', phone: '+92 301 2345678', whatsapp: '+92 301 2345678', licenseNumber: 'RLA-002', agency: 'PropertyAtlas', location: 'Bahria Town, Islamabad', specialization: 'Apartments', experience: 8, verified: true, rating: 4.8, commissionEarned: 6200000 },
+    { name: 'Bilal Khan', email: 'bilal.khan@propertyatlas.lifestyle', phone: '+92 302 3456789', whatsapp: '+92 302 3456789', licenseNumber: 'RLA-003', agency: 'PropertyAtlas', location: 'DHA, Islamabad', specialization: 'Commercial', experience: 10, verified: true, rating: 4.7, commissionEarned: 8100000 },
+    { name: 'Sana Malik', email: 'sana.malik@propertyatlas.lifestyle', phone: '+92 303 4567890', whatsapp: '+92 303 4567890', licenseNumber: 'RLA-004', agency: 'PropertyAtlas', location: 'F-11, Islamabad', specialization: 'Family Homes', experience: 6, verified: true, rating: 4.6, commissionEarned: 4300000 },
+    { name: 'Imran Qureshi', email: 'imran.qureshi@propertyatlas.lifestyle', phone: '+92 304 5678901', whatsapp: '+92 304 5678901', licenseNumber: 'RLA-005', agency: 'PropertyAtlas', location: 'Bani Gala, Islamabad', specialization: 'Villas', experience: 15, verified: false, rating: 4.5, commissionEarned: 5600000 },
+    { name: 'Zainab Ahmed', email: 'zainab.ahmed@propertyatlas.lifestyle', phone: '+92 305 6789012', whatsapp: '+92 305 6789012', licenseNumber: 'RLA-006', agency: 'PropertyAtlas', location: 'Gulberg Greens, Islamabad', specialization: 'Investment', experience: 9, verified: true, rating: 4.8, commissionEarned: 7200000 },
   ]
   const createdAgents = []
   for (const a of agents) {

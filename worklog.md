@@ -241,3 +241,31 @@ Stage Summary:
 - All data Islamabad/PKR based with Pakistani names
 - Sidebar grouped: Analytics, Catalog, People, CRM, Finance, System
 - Full CRUD on agents/users/leads + approval workflow + CSV exports
+
+---
+Task ID: 8
+Agent: main (Z.ai Code)
+Task: Rebrand to PropertyAtlas.lifestyle, update logo, contact info (WhatsApp + email), change admin password
+
+Work Log:
+- Copied uploaded logo (ChatGPT Image) to public/propertyatlas-logo.png (1024x1024, globe+buildings+pin, blue/gold)
+- Analyzed logo via VLM: "PropertyAtlas. Lifestyle" text, blue-to-gold gradient, globe with buildings
+- Updated layout.tsx: title "PropertyAtlas — Luxury Real Estate Lifestyle", favicon = logo
+- Updated admin-login.tsx: password Maik123 -> User112233, auth key -> propertyatlas-admin-auth, logo image + PropertyAtlas Lifestyle branding
+- Updated admin-dashboard.tsx: sidebar logo image + "PropertyAtlas Lifestyle · Admin", profile "PropertyAtlas Admin / admin@propertyatlas.lifestyle", removed unused Gem import
+- Updated storefront.tsx nav: logo image + "PropertyAtlas Lifestyle", replaced phone button with WhatsApp (wa.me/923318333368) + Email (mailto:playbeatdigital@proton.me) connect buttons
+- Updated storefront CTA section: "WhatsApp Us" + "Email Us" buttons with real contact links
+- Updated property detail dialog: "WhatsApp to tour" + "Request info" with real links
+- Updated footer (page.tsx): logo image, PropertyAtlas Lifestyle brand, WhatsApp + Email + social icons, contact: +92 331 8333368, playbeatdigital@proton.me, F-7 Markaz Islamabad, copyright PropertyAtlas.lifestyle
+- Renamed all "Zaraj/zaraj" -> "PropertyAtlas/propertyatlas" in: audit.ts, transactions API, seed.ts, README, .env.example, globals.css comment
+- Agent emails -> @propertyatlas.lifestyle, agency -> PropertyAtlas
+- Verified via agent-browser: storefront title, nav logo+brand, WhatsApp/Email links (correct hrefs), admin login rejects old password Maik123, accepts new User112233, admin sidebar shows PropertyAtlas branding, footer shows real contact info
+- Lint passes clean, zero console errors
+
+Stage Summary:
+- Brand: PropertyAtlas.lifestyle (replaced Zaraj Properties)
+- Logo: uploaded image used in nav, admin sidebar, admin login, footer, favicon
+- Contact: WhatsApp +923318333368 (wa.me link), Email playbeatdigital@proton.me (mailto link)
+- Connect buttons: nav (WhatsApp+Email), hero CTA (WhatsApp Us+Email Us), property dialog (WhatsApp to tour+Request info), footer (all)
+- Admin password: User112233 (old Maik123 rejected)
+- Address: F-7 Markaz, Islamabad, Pakistan

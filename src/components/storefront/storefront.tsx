@@ -4,8 +4,8 @@ import { useState, useMemo } from 'react'
 import {
   Building2, Search, MapPin, BedDouble, Bath, Maximize, Heart, Share2,
   ArrowRight, Star, TrendingUp, Hammer, CheckCircle2, Home, CalendarClock,
-  Phone, Mail, ShieldCheck, Award, Users, ChevronRight, X, Calculator,
-  Sparkles, Gem, KeyRound, Quote,
+  Mail, ShieldCheck, Award, Users, ChevronRight, X, Calculator,
+  Sparkles, KeyRound, Quote, MessageCircle,
 } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from '@/components/ui/button'
@@ -93,12 +93,10 @@ export function Storefront({ onEnterAdmin }: { onEnterAdmin: () => void }) {
       <header className="fixed top-0 z-50 w-full border-b border-gold/10 glass-dark">
         <div className="mx-auto flex h-20 max-w-7xl items-center gap-8 px-4 sm:px-6">
           <a href="#top" className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-lg gold-gradient text-black">
-              <Gem className="h-5 w-5" />
-            </div>
+            <img src="/propertyatlas-logo.png" alt="PropertyAtlas" className="h-12 w-12 rounded-lg object-contain" />
             <div className="leading-none">
-              <div className="font-serif text-xl font-bold tracking-wide-luxury text-foreground">ZARAJ</div>
-              <div className="text-[9px] uppercase tracking-luxury text-gold">Properties</div>
+              <div className="font-serif text-xl font-bold tracking-wide-luxury text-foreground">PropertyAtlas</div>
+              <div className="text-[9px] uppercase tracking-luxury text-gold">Lifestyle</div>
             </div>
           </a>
           <nav className="hidden items-center gap-1 md:flex">
@@ -120,12 +118,19 @@ export function Storefront({ onEnterAdmin }: { onEnterAdmin: () => void }) {
               </button>
             ))}
           </nav>
-          <div className="ml-auto flex items-center gap-3">
+          <div className="ml-auto flex items-center gap-2">
             <Button variant="ghost" size="sm" className="hidden text-muted-foreground hover:text-gold lg:inline-flex" onClick={() => setShowMortgage(true)}>
               <Calculator className="mr-2 h-4 w-4" /> Mortgage
             </Button>
-            <Button variant="ghost" size="sm" className="hidden text-muted-foreground hover:text-gold sm:inline-flex">
-              <Phone className="mr-2 h-4 w-4" /> +1 (800) 555-0199
+            <Button variant="ghost" size="sm" asChild className="hidden text-emerald-400 hover:text-emerald-300 sm:inline-flex">
+              <a href="https://wa.me/923318333368" target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp
+              </a>
+            </Button>
+            <Button variant="ghost" size="sm" asChild className="hidden text-muted-foreground hover:text-gold sm:inline-flex">
+              <a href="mailto:playbeatdigital@proton.me">
+                <Mail className="mr-2 h-4 w-4" /> Email
+              </a>
             </Button>
             <Button size="sm" variant="outline" onClick={onEnterAdmin} className="border-gold/40 text-gold hover:bg-gold/10 hover:text-gold">
               <KeyRound className="mr-1.5 h-4 w-4" /> Admin
@@ -331,9 +336,9 @@ export function Storefront({ onEnterAdmin }: { onEnterAdmin: () => void }) {
         </section>
       )}
 
-      {/* WHY ZARAJ */}
+      {/* WHY PropertyAtlas */}
       <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
-        <LuxurySectionHeader eyebrow="The Zaraj Standard" title="A bespoke approach to property" desc="Transparent process, elite agents, and end-to-end white-glove service." />
+        <LuxurySectionHeader eyebrow="The PropertyAtlas Standard" title="A bespoke approach to property" desc="Transparent process, elite agents, and end-to-end white-glove service." />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { icon: ShieldCheck, title: 'Verified listings', desc: 'Every property is vetted for legal clarity and accuracy.' },
@@ -357,7 +362,7 @@ export function Storefront({ onEnterAdmin }: { onEnterAdmin: () => void }) {
         <div className="mx-auto max-w-4xl px-4 py-24 text-center sm:px-6">
           <Quote className="mx-auto mb-6 h-10 w-10 text-gold/50" />
           <p className="font-serif text-2xl font-medium leading-relaxed text-white sm:text-3xl">
-            Zaraj found us a home that felt impossible to find. Their attention to detail and market knowledge is simply unmatched.
+            PropertyAtlas found us a home that felt impossible to find. Their attention to detail and market knowledge is simply unmatched.
           </p>
           <div className="mt-8 flex items-center justify-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-full gold-gradient text-base font-bold text-black">AK</div>
@@ -377,13 +382,19 @@ export function Storefront({ onEnterAdmin }: { onEnterAdmin: () => void }) {
               <Sparkles className="mb-4 h-8 w-8 text-gold" />
               <h2 className="font-serif text-3xl font-bold text-white sm:text-4xl">Ready to find your next home?</h2>
               <p className="mt-3 max-w-xl text-zinc-300">
-                Speak with a Zaraj property advisor today and receive a personalized shortlist within 24 hours.
+                Speak with a PropertyAtlas property advisor today and receive a personalized shortlist within 24 hours.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Button size="lg" className="gold-gradient text-black hover:opacity-90"><Phone className="mr-2 h-4 w-4" /> Call an advisor</Button>
-              <Button size="lg" variant="outline" className="border-gold/30 bg-transparent text-gold hover:bg-gold/10 hover:text-gold">
-                <Mail className="mr-2 h-4 w-4" /> Email us
+              <Button size="lg" asChild className="bg-emerald-600 text-white hover:bg-emerald-700">
+                <a href="https://wa.me/923318333368" target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp Us
+                </a>
+              </Button>
+              <Button size="lg" asChild variant="outline" className="border-gold/30 bg-transparent text-gold hover:bg-gold/10 hover:text-gold">
+                <a href="mailto:playbeatdigital@proton.me">
+                  <Mail className="mr-2 h-4 w-4" /> Email Us
+                </a>
               </Button>
             </div>
           </div>
@@ -652,11 +663,15 @@ function PropertyDetailDialog({
               )}
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Button className="flex-1 gold-gradient text-black hover:opacity-90">
-                  <Phone className="mr-2 h-4 w-4" /> Schedule a private tour
+                <Button asChild className="flex-1 bg-emerald-600 text-white hover:bg-emerald-700">
+                  <a href="https://wa.me/923318333368" target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp to tour
+                  </a>
                 </Button>
-                <Button variant="outline" className="flex-1 border-gold/30 text-gold hover:bg-gold/10 hover:text-gold">
-                  <Mail className="mr-2 h-4 w-4" /> Request info
+                <Button asChild variant="outline" className="flex-1 border-gold/30 text-gold hover:bg-gold/10 hover:text-gold">
+                  <a href="mailto:playbeatdigital@proton.me">
+                    <Mail className="mr-2 h-4 w-4" /> Request info
+                  </a>
                 </Button>
                 <Button variant="ghost" className="text-muted-foreground hover:text-gold">
                   <Share2 className="h-4 w-4" />

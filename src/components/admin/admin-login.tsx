@@ -7,8 +7,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
 // Admin password — set per project requirements.
-const ADMIN_PASSWORD = 'Maik123'
-const AUTH_KEY = 'zaraj-admin-auth'
+const ADMIN_PASSWORD = 'User112233'
+const AUTH_KEY = 'propertyatlas-admin-auth'
 
 export function isAdminAuthenticated() {
   if (typeof window === 'undefined') return false
@@ -59,11 +59,9 @@ export function AdminLogin({ onSuccess, onBack }: { onSuccess: () => void; onBac
 
         <div className="luxury-card luxury-shadow rounded-2xl p-8 sm:p-10">
           <div className="mb-8 flex flex-col items-center text-center">
-            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl gold-gradient text-black">
-              <Gem className="h-6 w-6" />
-            </div>
-            <div className="font-serif text-2xl font-bold tracking-wide-luxury text-white">ZARAJ</div>
-            <div className="text-[10px] uppercase tracking-luxury text-gold">Properties · Admin</div>
+            <img src="/propertyatlas-logo.png" alt="PropertyAtlas" className="mb-4 h-20 w-20 rounded-xl object-contain" />
+            <div className="font-serif text-2xl font-bold tracking-wide-luxury text-white">PropertyAtlas</div>
+            <div className="text-[10px] uppercase tracking-luxury text-gold">Lifestyle · Admin</div>
           </div>
 
           <div className="mb-6 flex items-center justify-center gap-2 text-xs text-muted-foreground">
@@ -108,7 +106,7 @@ export function AdminLogin({ onSuccess, onBack }: { onSuccess: () => void; onBac
           </form>
 
           <div className="mt-6 text-center text-xs text-muted-foreground">
-            Protected by Zaraj Security · All actions are audited
+            Protected by PropertyAtlas Security · All actions are audited
           </div>
         </div>
       </div>

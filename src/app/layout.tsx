@@ -21,17 +21,17 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Zaraj Properties — Luxury Real Estate",
-  description: "Zaraj Properties — a premium real estate marketplace for buying, renting and investing in luxury properties. Exclusive listings, off-plan projects, and a full enterprise admin console.",
-  keywords: ["Zaraj Properties", "luxury real estate", "properties for sale", "rentals", "ongoing projects", "property management"],
-  authors: [{ name: "Zaraj Properties" }],
+  title: "PropertyAtlas — Luxury Real Estate Lifestyle",
+  description: "PropertyAtlas.lifestyle — a premium real estate marketplace for buying, renting and investing in luxury properties. Exclusive listings, off-plan projects, and a full enterprise admin console.",
+  keywords: ["PropertyAtlas", "PropertyAtlas Lifestyle", "luxury real estate", "properties for sale", "rentals", "ongoing projects", "property management"],
+  authors: [{ name: "PropertyAtlas" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/propertyatlas-logo.png",
   },
   openGraph: {
-    title: "Zaraj Properties — Luxury Real Estate",
+    title: "PropertyAtlas — Luxury Real Estate Lifestyle",
     description: "Premium properties for sale, rentals and off-plan projects.",
-    siteName: "Zaraj Properties",
+    siteName: "PropertyAtlas",
     type: "website",
   },
 };
