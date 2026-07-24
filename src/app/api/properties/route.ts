@@ -3,6 +3,7 @@ import { db } from '@/lib/db'
 import { logAudit, slugify } from '@/lib/audit'
 
 export async function GET(req: NextRequest) {
+  try {
   const { searchParams } = new URL(req.url)
   const listingType = searchParams.get('listingType') // SALE | RENTAL | PROJECT
   const propertyType = searchParams.get('propertyType')
@@ -46,6 +47,9 @@ export async function GET(req: NextRequest) {
   })
 
   return NextResponse.json({ properties })
+  } catch (e) {
+    return NextResponse.json({ error: String(e?.message || e), stack: e?.stack?.split('\n').slice(0,5) }, { status: 500 })
+  }
 }
 
 export async function POST(req: NextRequest) {
