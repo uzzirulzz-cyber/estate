@@ -15,61 +15,175 @@ model Property {
   title           String
   slug            String   @unique
   description     String
-  // SALE | RENTAL | PROJECT
-  listingType     String
-  // APARTMENT | HOUSE | VILLA | TOWNHOUSE | PENTHOUSE | DUPLEX | COMMERCIAL | LAND
-  propertyType    String
-  // AVAILABLE | SOLD | RENTED | OFF_MARKET
-  status          String   @default("AVAILABLE")
+  listingType     String   // SALE | RENTAL | PROJECT
+  propertyType    String   // HOUSE | APARTMENT | VILLA | PLOT | COMMERCIAL | OFFICE | SHOP | WAREHOUSE | FARM | LAND | HOTEL | INDUSTRIAL | TOWNHOUSE | PENTHOUSE | DUPLEX
+  status          String   @default("PENDING") // PENDING | AVAILABLE | SOLD | RENTED | OFF_MARKET | SUSPENDED | REJECTED
+  approvalStatus  String   @default("PENDING") // PENDING | APPROVED | REJECTED | CHANGES_REQUESTED
   price           Float
   monthlyRent     Float?
-  // Project-only fields
   projectProgress Int?
   expectedCompletion String?
-
   address         String
   city            String
   state           String
   zipCode         String
-  bedrooms        Int
-  bathrooms       Float
-  area            Float    // sqft
+  country         String   @default("Pakistan")
+  bedrooms        Int      @default(0)
+  bathrooms       Float    @default(0)
+  area            Float    @default(0)
+  landSize        Float?
   yearBuilt       Int?
+  parkingSpaces   Int      @default(0)
+  furnished       String   @default("UNFURNISHED") // UNFURNISHED | SEMI_FURNISHED | FULLY_FURNISHED
+  condition       String   @default("NEW") // NEW | EXCELLENT | GOOD | NEEDS_REPAIR
   imageUrl        String
-  gallery         String?  // comma-separated urls
-  features        String?  // comma-separated features
+  gallery         String?
+  features        String?
+  amenities       String?
   featured        Boolean  @default(false)
+  published       Boolean  @default(true)
+  ownerName       String?
+  ownerPhone      String?
+  assignedAgentId String?  @db.ObjectId
+  assignedAgent   Agent?   @relation(fields: [assignedAgentId], references: [id], onDelete: SetNull)
+  latitude        Float?
+  longitude       Float?
+  seoTitle        String?
+  seoDescription  String?
+  views           Int      @default(0)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
   transactions    Transaction[]
   auditLogs       AuditLog[]
+  leads           Lead[]
+  appointments    Appointment[]
+}
+
+model Agent {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  email           String   @unique
+  phone           String
+  whatsapp        String?
+  photoUrl        String?
+  licenseNumber   String?
+  agency          String?
+  location        String?
+  specialization  String?  // e.g. "Luxury Homes", "Commercial"
+  experience      Int      @default(0)
+  verified        Boolean  @default(false)
+  status          String   @default("ACTIVE") // ACTIVE | SUSPENDED | INACTIVE
+  rating          Float    @default(5.0)
+  totalLeads      Int      @default(0)
+  convertedLeads  Int      @default(0)
+  commissionEarned Float   @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  properties      Property[]
+  transactions    Transaction[]
+  leads           Lead[]
+  appointments    Appointment[]
+}
+
+model User {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  email           String   @unique
+  phone           String?
+  role            String   @default("BUYER") // BUYER | TENANT | OWNER | LANDLORD | AGENT | AGENCY | DEVELOPER | INVESTOR
+  status          String   @default("ACTIVE") // ACTIVE | PENDING | SUSPENDED | BLOCKED
+  verified        Boolean  @default(false)
+  photoUrl        String?
+  location        String?
+  savedProperties String?  // comma-separated property ids
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Lead {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  customerName    String
+  email           String
+  phone           String
+  whatsapp        String?
+  propertyId      String?  @db.ObjectId
+  property        Property? @relation(fields: [propertyId], references: [id], onDelete: SetNull)
+  budget          Float?
+  locationPref    String?
+  propertyTypePref String?
+  listingType     String   @default("SALE") // SALE | RENTAL
+  assignedAgentId String?  @db.ObjectId
+  assignedAgent   Agent?   @relation(fields: [assignedAgentId], references: [id], onDelete: SetNull)
+  stage           String   @default("NEW") // NEW | CONTACTED | FOLLOW_UP | VIEWING | NEGOTIATION | CONVERTED | LOST
+  source          String   @default("WEBSITE") // WEBSITE | REFERRAL | SOCIAL | CALL | WALK_IN
+  score           Int      @default(50) // 0-100
+  notes           String?
+  followUpDate    DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Appointment {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  propertyId      String   @db.ObjectId
+  property        Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  agentId         String?  @db.ObjectId
+  agent           Agent?   @relation(fields: [agentId], references: [id], onDelete: SetNull)
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  type            String   @default("VIEWING") // VIEWING | MEETING | SITE_VISIT | VIRTUAL_TOUR
+  scheduledAt     DateTime
+  status          String   @default("SCHEDULED") // SCHEDULED | CONFIRMED | COMPLETED | CANCELLED | RESCHEDULED
+  notes           String?
+  createdAt       DateTime @default(now())
 }
 
 model Transaction {
   id               String   @id @default(auto()) @map("_id") @db.ObjectId
   propertyId       String   @db.ObjectId
   property         Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-  // SALE | RENTAL
-  type             String
+  agentId          String?  @db.ObjectId
+  agent            Agent?   @relation(fields: [agentId], references: [id], onDelete: SetNull)
+  type             String   // SALE | RENTAL
   buyerName        String
   sellerName       String
   agentName        String
-  amount           Float    // total deal amount
-  commissionRate   Float    // percentage e.g. 3
+  amount           Float
+  deposit          Float    @default(0)
+  commissionRate   Float
   commissionAmount Float
-  taxRate          Float    // percentage e.g. 5
+  taxRate          Float
   taxAmount        Float
-  netRevenue       Float    // amount - commission - tax (agency profit basis)
-  profit           Float    // commissionAmount - costs (estimated)
+  netRevenue       Float
+  profit           Float
   saleDate         DateTime @default(now())
-  status           String   @default("COMPLETED") // COMPLETED | PENDING | CANCELLED
+  status           String   @default("COMPLETED")
   paymentMethod    String   @default("BANK_TRANSFER")
+  contractStatus   String   @default("SIGNED") // DRAFT | SIGNED | COMPLETED
   notes            String?
   createdAt        DateTime @default(now())
 
   taxRecord        TaxRecord?
   auditLogs        AuditLog[]
+  payments         Payment[]
+}
+
+model Payment {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  transactionId   String?  @db.ObjectId
+  transaction     Transaction? @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  amount          Float
+  type            String   // PROPERTY | RENTAL | DEPOSIT | COMMISSION | PLATFORM_FEE | REFUND
+  status          String   @default("PENDING") // PAID | PENDING | FAILED | REFUNDED | PARTIAL
+  method          String   @default("BANK_TRANSFER")
+  invoiceNumber   String?
+  payerName       String?
+  dueDate         DateTime?
+  paidDate        DateTime?
+  createdAt       DateTime @default(now())
 }
 
 model TaxRecord {
@@ -80,15 +194,15 @@ model TaxRecord {
   taxRate       Float
   taxableAmount Float
   taxAmount     Float
-  status        String      @default("PENDING") // PENDING | PAID
+  status        String      @default("PENDING")
   paidDate      DateTime?
   createdAt     DateTime    @default(now())
 }
 
 model AuditLog {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  action      String   // CREATE | UPDATE | DELETE | SALE | TAX_PAID etc.
-  entity      String   // PROPERTY | TRANSACTION | TAX
+  action      String
+  entity      String
   entityId    String   @db.ObjectId
   property    Property? @relation(fields: [propertyId], references: [id], onDelete: SetNull)
   propertyId  String?   @db.ObjectId
@@ -97,4 +211,48 @@ model AuditLog {
   performedBy String   @default("admin@zaraj.io")
   details     String
   timestamp   DateTime @default(now())
+}
+
+model REProject {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  developer       String
+  location        String
+  city            String
+  description     String
+  startingPrice   Float
+  completionDate  String?
+  totalUnits      Int      @default(0)
+  availableUnits  Int      @default(0)
+  soldUnits       Int      @default(0)
+  imageUrl        String
+  amenities       String?
+  brochureUrl     String?
+  status          String   @default("ONGOING") // ONGOING | COMPLETED | UPCOMING
+  featured        Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Location {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  parentId        String?  @db.ObjectId
+  level           String   // COUNTRY | STATE | CITY | AREA | SOCIETY | BLOCK
+  propertyCount   Int      @default(0)
+  imageUrl        String?
+  seoContent      String?
+  popular         Boolean  @default(false)
+  createdAt       DateTime @default(now())
+}
+
+model Notification {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  type            String   // PROPERTY_SUBMITTED | PROPERTY_APPROVED | PROPERTY_REJECTED | NEW_INQUIRY | APPOINTMENT_BOOKED | PAYMENT_RECEIVED | PAYMENT_FAILED | NEW_USER
+  title           String
+  message         String
+  channel         String   @default("IN_APP") // IN_APP | EMAIL | SMS | WHATSAPP | PUSH
+  recipient       String?
+  read            Boolean  @default(false)
+  createdAt       DateTime @default(now())
 }

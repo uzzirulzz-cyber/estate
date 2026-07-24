@@ -92,18 +92,25 @@ export interface AuditLog {
 export interface DashboardStats {
   kpis: {
     totalProperties: number
-    availableProperties: number
+    activeListings: number
+    pendingApprovals: number
     soldProperties: number
     rentedProperties: number
     projectProperties: number
+    totalAgents: number
+    activeAgents: number
+    registeredUsers: number
+    propertyOwners: number
+    totalLeads: number
+    convertedLeads: number
+    leadConversionRate: number
+    totalAppointments: number
+    websiteVisits: number
     totalSalesVolume: number
     totalRevenue: number
     totalProfit: number
     totalTaxCollected: number
     pendingTaxAmount: number
-    paidTaxAmount: number
-    pendingTaxCount: number
-    paidTaxCount: number
     ytdRevenue: number
     ytdProfit: number
     ytdSales: number
@@ -113,9 +120,20 @@ export interface DashboardStats {
     avgDealSize: number
     profitMargin: number
     auditCount: number
+    pendingPayments: number
+    totalPaymentsPaid: number
+    unreadNotifications: number
+    // legacy compat
+    availableProperties: number
+    paidTaxAmount: number
+    pendingTaxCount: number
+    paidTaxCount: number
   }
   topAgents: { name: string; revenue: number; profit: number; deals: number }[]
   salesByType: { type: string; count: number; revenue: number }[]
+  leadStages: { stage: string; count: number }[]
+  recentTransactions: (Transaction & { property?: { title: string; city: string } })[]
+  recentActivity: (AuditLog & { property?: { title: string } | null })[]
 }
 
 export interface ChartSeries {
