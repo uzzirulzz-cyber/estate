@@ -57,5 +57,9 @@ test
 prompt
 
 server.log
+
 # Skills directory
 /skills/
+
+# Local dev launcher (contains DB credentials)
+.zscripts/start-dev.sh
