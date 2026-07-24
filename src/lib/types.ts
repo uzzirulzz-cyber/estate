@@ -167,16 +167,16 @@ export const PROPERTY_TYPE_LABEL: Record<PropertyKind, string> = {
 
 export function formatCurrency(n: number, compact = false) {
   if (compact && Math.abs(n) >= 1000) {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-PK', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'PKR',
       notation: 'compact',
       maximumFractionDigits: 1,
     }).format(n)
   }
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('en-PK', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'PKR',
     maximumFractionDigits: 0,
   }).format(n)
 }

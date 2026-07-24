@@ -172,3 +172,39 @@ Stage Summary:
 - Fix: postinstall + build scripts now run "prisma generate" so MongoDB client is built on every deploy
 - DATABASE_URL env var correctly configured in Vercel for production + preview
 - All 6 API endpoints return 200 on live site, 10 properties loading from MongoDB Atlas
+
+---
+Task ID: 6
+Agent: main (Z.ai Code)
+Task: Convert pricing to PKR (Pakistani Rupee) and rebase properties in Islamabad, Pakistan
+
+Work Log:
+- Updated formatCurrency() in src/lib/types.ts: currency USD -> PKR, locale en-US -> en-PK
+- Rewrote prisma/seed.ts with 10 Islamabad-based properties:
+  * Margalla View Luxury Villa (F-7) - Rs 185,000,000
+  * The Crescent Apartments (Bahria Town) - Rs 22,500,000
+  * Centaurus Towers Pre-Construction (F-8) - Rs 65,000,000
+  * F-11 Family Home - Rs 48,000,000
+  * The Pinnacle Penthouse (F-8, rental) - Rs 1,200,000/mo
+  * DHA Phase 2 Townhomes - Rs 38,000,000
+  * Rawal Lake View Villa (Bani Gala, rental) - Rs 850,000/mo
+  * Blue Area Business Tower (Commercial) - Rs 320,000,000
+  * Capital Smart City Phase 2 (Project) - Rs 35,000,000
+  * Gulberg Greens Duplex Residences - Rs 42,000,000
+- Updated agents/buyers/sellers to Pakistani names (Ahmed Raza, Fatima Sheikh, Bilal Khan, etc.)
+- Updated transactions: 9 sales/rentals with PKR amounts, audit trail references PKR
+- Re-seeded MongoDB: 10 properties, 9 transactions, 9 tax records, 22 audit logs
+- Verified via agent-browser:
+  * Storefront: prices show as "Rs850,000/mo", "Rs65,000,000", "Rs320,000,000" etc.
+  * Locations: F-7, F-8, F-11, Bahria Town, DHA, Bani Gala, Gulberg Greens, Blue Area, Chakri Road — all Islamabad
+  * Admin dashboard: KPIs in PKR (Rs21.6M revenue, Rs14.1M profit, Rs680.1M sales volume)
+  * Admin properties table: "Gulberg Greens, Islamabad", "Chakri Road, Islamabad", "Blue Area, Islamabad"
+- Cleared .next cache to resolve stale parse error from earlier diagnostic edit
+- Lint passes clean, no console errors
+
+Stage Summary:
+- All prices now in PKR (Pakistani Rupee) with "Rs" prefix
+- All 10 properties based in Islamabad, Pakistan (sectors F-7, F-8, F-11, Bahria Town, DHA, Bani Gala, Gulberg Greens, Blue Area, Chakri Road)
+- Realistic Islamabad real estate pricing (35M-320M PKR for sales, 850K-1.2M PKR/month for rentals)
+- Pakistani names for agents/buyers/sellers
+- Storefront + admin + all APIs show PKR pricing

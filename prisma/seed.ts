@@ -1,14 +1,15 @@
 import { db } from '../src/lib/db'
 
+// Islamabad-based agents, buyers, sellers (Pakistani names)
 const sales = [
-  { city: 'Manhattan', state: 'NY', agent: 'Sarah Mitchell', buyer: 'James Carter', seller: 'Estate Holdings LLC' },
-  { city: 'Brooklyn', state: 'NY', agent: 'David Chen', buyer: 'Olivia Bennett', seller: 'Urban Nest Group' },
-  { city: 'Miami', state: 'FL', agent: 'Maria Rodriguez', buyer: 'Robert Hayes', seller: 'Coastal Properties' },
-  { city: 'Austin', state: 'TX', agent: 'Tyler Brooks', buyer: 'Emma Watson', seller: 'Lonestar Realty' },
-  { city: 'Seattle', state: 'WA', agent: 'Jessica Park', buyer: 'Michael Chang', seller: 'Emerald City Homes' },
-  { city: 'Denver', state: 'CO', agent: 'Ryan Foster', buyer: 'Sophia Reed', seller: 'Mile High Estates' },
-  { city: 'San Francisco', state: 'CA', agent: 'Daniel Kim', buyer: 'William Scott', seller: 'Bay Area Ventures' },
-  { city: 'Phoenix', state: 'AZ', agent: 'Lauren Wells', buyer: 'Isabella Cruz', seller: 'Desert Sky Realty' },
+  { city: 'F-7', state: 'Islamabad', agent: 'Ahmed Raza', buyer: 'Bilal Khan', seller: 'Capital Holdings Pvt Ltd' },
+  { city: 'Bahria Town', state: 'Islamabad', agent: 'Fatima Sheikh', buyer: 'Hassan Ali', seller: 'Bahria Town Ltd' },
+  { city: 'DHA Phase 2', state: 'Islamabad', agent: 'Sana Malik', buyer: 'Usman Tariq', seller: 'DHA Islamabad' },
+  { city: 'F-11', state: 'Islamabad', agent: 'Imran Qureshi', buyer: 'Ayesha Siddiqui', seller: 'Margalla Builders' },
+  { city: 'G-11', state: 'Islamabad', agent: 'Zainab Ahmed', buyer: 'Hamza Sheikh', seller: 'Green Valley Realty' },
+  { city: 'E-7', state: 'Islamabad', agent: 'Bilal Khan', buyer: 'Mariam Iqbal', seller: 'Diplomatic Enclave Estates' },
+  { city: 'Bani Gala', state: 'Islamabad', agent: 'Sana Malik', buyer: 'Asad Mahmood', seller: 'Rawal Lake View' },
+  { city: 'Blue Area', state: 'Islamabad', agent: 'Ahmed Raza', buyer: 'Nida Parveen', seller: 'Centaurus Mall Group' },
 ]
 
 function slugify(s: string) {
@@ -16,7 +17,7 @@ function slugify(s: string) {
 }
 
 async function main() {
-  console.log('Seeding database...')
+  console.log('Seeding database (Islamabad properties, PKR pricing)...')
 
   // Clean
   await db.auditLog.deleteMany()
@@ -28,123 +29,123 @@ async function main() {
 
   const properties = [
     {
-      title: 'Skyline Glass Villa',
-      description: 'A breathtaking modern villa featuring floor-to-ceiling glass walls, an infinity pool, and panoramic city views. Designed by award-winning architects with smart-home automation throughout.',
+      title: 'Margalla View Luxury Villa',
+      description: 'A breathtaking modern villa in F-7 with panoramic Margalla Hills views, infinity pool, and smart-home automation throughout. Designed by award-winning architects with premium imported finishes.',
       listingType: 'SALE', propertyType: 'VILLA', status: 'AVAILABLE',
-      price: 2850000, monthlyRent: null,
+      price: 185000000, monthlyRent: null, // 18.5 crore PKR
       projectProgress: null, expectedCompletion: null,
-      address: '1480 Ridge Crest Drive', city: 'Manhattan', state: 'NY', zipCode: '10019',
-      bedrooms: 5, bathrooms: 4.5, area: 6200, yearBuilt: 2023,
+      address: 'House 12, Street 23, F-7/2', city: 'F-7', state: 'Islamabad', zipCode: '44000',
+      bedrooms: 6, bathrooms: 7, area: 9000, yearBuilt: 2023,
       imageUrl: '/properties/villa1.png', gallery: '/properties/villa1.png',
-      features: 'Infinity Pool,Smart Home,Wine Cellar,Home Theater,3-Car Garage',
+      features: 'Infinity Pool,Smart Home,Wine Cellar,Home Theater,4-Car Garage,Lush Garden',
       featured: true,
     },
     {
       title: 'The Crescent Apartments',
-      description: 'Contemporary apartment building offering bright open-plan units with premium finishes, rooftop terrace, and 24/7 concierge service in the heart of downtown.',
+      description: 'Contemporary apartment building in Bahria Town Phase 8 offering bright open-plan units with premium finishes, rooftop terrace, and 24/7 concierge security.',
       listingType: 'SALE', propertyType: 'APARTMENT', status: 'AVAILABLE',
-      price: 685000, monthlyRent: null,
+      price: 22500000, monthlyRent: null, // 2.25 crore PKR
       projectProgress: null, expectedCompletion: null,
-      address: '77 Crescent Boulevard', city: 'Brooklyn', state: 'NY', zipCode: '11201',
+      address: 'Block C, Bahria Town Phase 8', city: 'Bahria Town', state: 'Islamabad', zipCode: '46000',
       bedrooms: 2, bathrooms: 2, area: 1450, yearBuilt: 2022,
       imageUrl: '/properties/apt1.png', gallery: '/properties/apt1.png',
-      features: 'Rooftop Terrace,Concierge,Gym,Doorman,Pet Friendly',
+      features: 'Rooftop Terrace,Concierge,Gym,24/7 Security,Pet Friendly,Backup Generator',
       featured: true,
     },
     {
-      title: 'Aurora Tower (Pre-Construction)',
-      description: 'An iconic 42-story residential tower currently under construction. Featuring luxury residences, sky lounge, and resort-style amenities. Reserve your unit today with pre-construction pricing.',
+      title: 'Centaurus Towers (Pre-Construction)',
+      description: 'An iconic 40-story residential tower currently under construction in the heart of Islamabad. Featuring luxury residences, sky lounge, and resort-style amenities. Reserve your unit today with pre-launch pricing.',
       listingType: 'PROJECT', propertyType: 'APARTMENT', status: 'AVAILABLE',
-      price: 1250000, monthlyRent: null,
-      projectProgress: 45, expectedCompletion: 'Q3 2026',
-      address: '900 Harborfront Avenue', city: 'Miami', state: 'FL', zipCode: '33132',
+      price: 65000000, monthlyRent: null, // 6.5 crore PKR
+      projectProgress: 45, expectedCompletion: 'Q4 2026',
+      address: 'Jinnah Avenue, F-8 Markaz', city: 'F-8', state: 'Islamabad', zipCode: '44000',
       bedrooms: 3, bathrooms: 3, area: 2100, yearBuilt: null,
       imageUrl: '/properties/project1.png', gallery: '/properties/project1.png',
-      features: 'Sky Lounge,Infinity Pool,Spa,Valet Parking,Smart Home',
+      features: 'Sky Lounge,Infinity Pool,Spa,Valet Parking,Smart Home,Fast Elevators',
       featured: true,
     },
     {
-      title: 'Maple Grove Family Home',
-      description: 'Charming suburban family home on a quiet tree-lined street. Renovated kitchen, hardwood floors, private backyard, and finished basement. Move-in ready.',
+      title: 'F-11 Family Home',
+      description: 'Charming family home on a quiet street in F-11. Renovated kitchen, marble floors, private lawn, and spacious basement. Move-in ready in one of Islamabad\u2019s most sought-after sectors.',
       listingType: 'SALE', propertyType: 'HOUSE', status: 'AVAILABLE',
-      price: 542000, monthlyRent: null,
+      price: 48000000, monthlyRent: null, // 4.8 crore PKR
       projectProgress: null, expectedCompletion: null,
-      address: '24 Maple Grove Lane', city: 'Austin', state: 'TX', zipCode: '78704',
-      bedrooms: 4, bathrooms: 3, area: 2800, yearBuilt: 2018,
+      address: 'House 45, Street 10, F-11/3', city: 'F-11', state: 'Islamabad', zipCode: '44000',
+      bedrooms: 5, bathrooms: 5, area: 3600, yearBuilt: 2019,
       imageUrl: '/properties/house1.png', gallery: '/properties/house1.png',
-      features: 'Renovated Kitchen,Backyard,Finished Basement,2-Car Garage,Solar Panels',
+      features: 'Renovated Kitchen,Private Lawn,Marble Floors,2-Car Garage,Solar Panels,Servant Quarter',
       featured: false,
     },
     {
       title: 'The Pinnacle Penthouse',
-      description: 'Ultra-luxury penthouse occupying the top floor with 360-degree views, private elevator, wraparound terrace, and designer interiors. The pinnacle of urban living.',
+      description: 'Ultra-luxury penthouse occupying the top floor of Centaurus with 360-degree views of Islamabad, private elevator, wraparound terrace, and designer interiors. The pinnacle of capital living.',
       listingType: 'RENTAL', propertyType: 'PENTHOUSE', status: 'AVAILABLE',
-      price: 0, monthlyRent: 18500,
+      price: 0, monthlyRent: 1200000, // 12 lakh PKR/month
       projectProgress: null, expectedCompletion: null,
-      address: '1 Summit Place, PH', city: 'San Francisco', state: 'CA', zipCode: '94105',
-      bedrooms: 4, bathrooms: 4, area: 3800, yearBuilt: 2021,
+      address: 'Centaurus Mall, Penthouse Floor, Jinnah Avenue', city: 'F-8', state: 'Islamabad', zipCode: '44000',
+      bedrooms: 4, bathrooms: 5, area: 5200, yearBuilt: 2021,
       imageUrl: '/properties/penthouse1.png', gallery: '/properties/penthouse1.png',
-      features: 'Private Elevator,Wraparound Terrace,Smart Home,Concierge,Wine Room',
+      features: 'Private Elevator,Wraparound Terrace,Smart Home,Concierge,Wine Room,City View',
       featured: true,
     },
     {
-      title: 'Heritage Townhomes Collection',
-      description: 'Elegant row of modern townhomes with classic brick facades, private rooftop decks, and energy-efficient design. Steps from parks and dining.',
+      title: 'DHA Phase 2 Townhomes',
+      description: 'Elegant modern townhomes in DHA Phase 2 with contemporary facades, private rooftop decks, and energy-efficient design. Steps from the DHA Club and commercial market.',
       listingType: 'SALE', propertyType: 'TOWNHOUSE', status: 'AVAILABLE',
-      price: 748000, monthlyRent: null,
+      price: 38000000, monthlyRent: null, // 3.8 crore PKR
       projectProgress: null, expectedCompletion: null,
-      address: '120-128 Heritage Row', city: 'Seattle', state: 'WA', zipCode: '98101',
-      bedrooms: 3, bathrooms: 2.5, area: 2200, yearBuilt: 2020,
+      address: 'Sector D, DHA Phase 2', city: 'DHA Phase 2', state: 'Islamabad', zipCode: '45750',
+      bedrooms: 4, bathrooms: 4, area: 3200, yearBuilt: 2020,
       imageUrl: '/properties/townhouse1.png', gallery: '/properties/townhouse1.png',
-      features: 'Rooftop Deck,Energy Efficient,Hardwood Floors,Attached Garage,Smart Locks',
+      features: 'Rooftop Deck,Energy Efficient,Marble Floors,Attached Garage,Smart Locks,Backup Power',
       featured: false,
     },
     {
-      title: 'Casa del Mar Beachfront',
-      description: 'Stunning beachfront retreat with direct ocean access, vaulted ceilings, and walls of glass opening to a sprawling deck. The ultimate coastal lifestyle.',
+      title: 'Rawal Lake View Villa',
+      description: 'Stunning villa with direct Rawal Lake access, vaulted ceilings, and walls of glass opening to a sprawling deck. The ultimate Bani Gala lifestyle with serene water views.',
       listingType: 'RENTAL', propertyType: 'VILLA', status: 'AVAILABLE',
-      price: 0, monthlyRent: 12500,
+      price: 0, monthlyRent: 850000, // 8.5 lakh PKR/month
       projectProgress: null, expectedCompletion: null,
-      address: '55 Coastal Highway', city: 'Miami', state: 'FL', zipCode: '33139',
-      bedrooms: 4, bathrooms: 3.5, area: 3400, yearBuilt: 2019,
+      address: 'Bani Gala, Near Rawal Lake', city: 'Bani Gala', state: 'Islamabad', zipCode: '45500',
+      bedrooms: 5, bathrooms: 6, area: 6500, yearBuilt: 2019,
       imageUrl: '/properties/beach1.png', gallery: '/properties/beach1.png',
-      features: 'Beachfront,Ocean View,Pool,Outdoor Kitchen,Hurricane Windows',
+      features: 'Lake View,Swimming Pool,Outdoor Kitchen,Landscaped Garden,Standby Generator,Solar System',
       featured: true,
     },
     {
-      title: 'Meridian Business Tower',
-      description: 'Class-A commercial office space in the central business district. Flexible floor plans, premium building systems, and stunning lobby. Ideal for HQ relocation.',
+      title: 'Blue Area Business Tower',
+      description: 'Class-A commercial office tower in Blue Area, Islamabad\u2019s central business district. Flexible floor plans, premium building systems, and stunning lobby. Ideal for corporate HQ.',
       listingType: 'SALE', propertyType: 'COMMERCIAL', status: 'AVAILABLE',
-      price: 4200000, monthlyRent: null,
+      price: 320000000, monthlyRent: null, // 32 crore PKR
       projectProgress: null, expectedCompletion: null,
-      address: '300 Meridian Plaza', city: 'Denver', state: 'CO', zipCode: '80202',
-      bedrooms: 0, bathrooms: 6, area: 18500, yearBuilt: 2017,
+      address: 'Plot 14, Blue Area, F-8 Markaz', city: 'Blue Area', state: 'Islamabad', zipCode: '44000',
+      bedrooms: 0, bathrooms: 8, area: 28000, yearBuilt: 2018,
       imageUrl: '/properties/commercial1.png', gallery: '/properties/commercial1.png',
-      features: 'Class A,Flexible Layouts,Underground Parking,Conference Center,Café',
+      features: 'Class A,Flexible Layouts,Underground Parking,Conference Center,Caf\u00e9,High-Speed Elevators',
       featured: false,
     },
     {
-      title: 'Greenfield Estates (Phase 2)',
-      description: 'Phase 2 of the popular Greenfield Estates master-planned community. 60 single-family homes with community clubhouse, trails, and parks. Foundation work underway.',
+      title: 'Capital Smart City (Phase 2)',
+      description: 'Phase 2 of the popular Capital Smart City master-planned community. 200 villas with clubhouse, nature trails, and parks. Smart-city infrastructure with fiber to every home. Foundation work underway.',
       listingType: 'PROJECT', propertyType: 'HOUSE', status: 'AVAILABLE',
-      price: 495000, monthlyRent: null,
-      projectProgress: 25, expectedCompletion: 'Q1 2026',
-      address: 'Greenfield Boulevard', city: 'Phoenix', state: 'AZ', zipCode: '85048',
-      bedrooms: 4, bathrooms: 2.5, area: 2600, yearBuilt: null,
+      price: 35000000, monthlyRent: null, // 3.5 crore PKR
+      projectProgress: 30, expectedCompletion: 'Q2 2027',
+      address: 'Capital Smart City, M-2 Motorway', city: 'Chakri Road', state: 'Islamabad', zipCode: '46000',
+      bedrooms: 4, bathrooms: 4, area: 3000, yearBuilt: null,
       imageUrl: '/properties/project2.png', gallery: '/properties/project2.png',
-      features: 'Clubhouse,Trails,Parks,Smart Home,Energy Efficient',
+      features: 'Smart City,Clubhouse,Nature Trails,Parks,Fiber Internet,Eco-Friendly',
       featured: false,
     },
     {
-      title: 'The Laurent Duplex Residences',
-      description: 'Sophisticated duplex apartments with landscaped entrances, private garages, and spacious layouts. Premium location near top schools and shopping.',
+      title: 'Gulberg Greens Duplex Residences',
+      description: 'Sophisticated duplex apartments in Gulberg Greens with landscaped entrances, private garages, and spacious modern layouts. Premium location near the Islamabad Expressway.',
       listingType: 'SALE', propertyType: 'DUPLEX', status: 'AVAILABLE',
-      price: 612000, monthlyRent: null,
+      price: 42000000, monthlyRent: null, // 4.2 crore PKR
       projectProgress: null, expectedCompletion: null,
-      address: '88 Laurent Avenue', city: 'Austin', state: 'TX', zipCode: '78703',
-      bedrooms: 3, bathrooms: 2.5, area: 1900, yearBuilt: 2021,
+      address: 'Block D, Gulberg Greens', city: 'Gulberg Greens', state: 'Islamabad', zipCode: '45700',
+      bedrooms: 4, bathrooms: 4, area: 3400, yearBuilt: 2021,
       imageUrl: '/properties/duplex1.png', gallery: '/properties/duplex1.png',
-      features: 'Private Garage,Hardwood Floors,Fireplace,Patio,Storage',
+      features: 'Private Garage,Marble Floors,Fireplace,Roof Terrace,Storage,Modern Kitchen',
       featured: false,
     },
   ]
@@ -161,23 +162,23 @@ async function main() {
         entity: 'PROPERTY',
         entityId: created.id,
         propertyId: created.id,
-        performedBy: 'system@seed',
-        details: `Property "${created.title}" listed (${created.listingType})`,
+        performedBy: 'system@zaraj.io',
+        details: `Property "${created.title}" listed (${created.listingType}) in ${created.city}, ${created.state}`,
       },
     })
   }
 
   // Create historical transactions (some properties sold/rented)
   const txData = [
-    { propIdx: 0, type: 'SALE', status: 'COMPLETED', monthsAgo: 0, data: sales[0] },     // Skyline Glass Villa sold
-    { propIdx: 1, type: 'SALE', status: 'COMPLETED', monthsAgo: 1, data: sales[1] },     // Crescent Apts sold
-    { propIdx: 3, type: 'SALE', status: 'COMPLETED', monthsAgo: 2, data: sales[3] },     // Maple Grove sold
-    { propIdx: 5, type: 'SALE', status: 'COMPLETED', monthsAgo: 3, data: sales[5] },     // Heritage Townhomes sold
-    { propIdx: 7, type: 'SALE', status: 'COMPLETED', monthsAgo: 4, data: sales[7] },     // Meridian Tower sold
-    { propIdx: 9, type: 'SALE', status: 'COMPLETED', monthsAgo: 5, data: sales[6] },     // Laurent Duplex sold
+    { propIdx: 0, type: 'SALE', status: 'COMPLETED', monthsAgo: 0, data: sales[0] },     // Margalla View Villa sold
+    { propIdx: 1, type: 'SALE', status: 'COMPLETED', monthsAgo: 1, data: sales[1] },     // Crescent Apartments sold
+    { propIdx: 3, type: 'SALE', status: 'COMPLETED', monthsAgo: 2, data: sales[3] },     // F-11 Home sold
+    { propIdx: 5, type: 'SALE', status: 'COMPLETED', monthsAgo: 3, data: sales[5] },     // DHA Townhomes sold
+    { propIdx: 7, type: 'SALE', status: 'COMPLETED', monthsAgo: 4, data: sales[7] },     // Blue Area Tower sold
+    { propIdx: 9, type: 'SALE', status: 'COMPLETED', monthsAgo: 5, data: sales[6] },     // Gulberg Duplex sold
     { propIdx: 4, type: 'RENTAL', status: 'COMPLETED', monthsAgo: 1, data: sales[2] },   // Pinnacle Penthouse rented
-    { propIdx: 6, type: 'RENTAL', status: 'COMPLETED', monthsAgo: 2, data: sales[4] },   // Casa del Mar rented
-    { propIdx: 2, type: 'SALE', status: 'PENDING', monthsAgo: 0, data: sales[0] },       // Aurora Tower pending
+    { propIdx: 6, type: 'RENTAL', status: 'COMPLETED', monthsAgo: 2, data: sales[4] },   // Rawal Lake Villa rented
+    { propIdx: 2, type: 'SALE', status: 'PENDING', monthsAgo: 0, data: sales[0] },       // Centaurus pending
   ]
 
   for (const t of txData) {
@@ -209,8 +210,8 @@ async function main() {
         profit,
         saleDate,
         status: t.status,
-        paymentMethod: ['BANK_TRANSFER', 'WIRE', 'CREDIT_CARD', 'CASH'][Math.floor(Math.random() * 4)],
-        notes: t.type === 'SALE' ? 'Standard sale transaction.' : '12-month lease agreement.',
+        paymentMethod: ['BANK_TRANSFER', 'WIRE', 'PAYORDER', 'CASH'][Math.floor(Math.random() * 4)],
+        notes: t.type === 'SALE' ? 'Standard sale transaction in Islamabad.' : '12-month lease agreement.',
       },
     })
 
@@ -234,8 +235,8 @@ async function main() {
         entityId: tx.id,
         transactionId: tx.id,
         propertyId: prop.id,
-        performedBy: t.data.agent.toLowerCase().replace(' ', '.') + '@esterra.io',
-        details: `${t.type} of "${prop.title}" for $${saleAmount.toLocaleString()} (${t.status})`,
+        performedBy: t.data.agent.toLowerCase().replace(' ', '.') + '@zaraj.io',
+        details: `${t.type} of "${prop.title}" for PKR ${saleAmount.toLocaleString()} (${t.status})`,
       },
     })
 
@@ -257,8 +258,8 @@ async function main() {
         entity: 'PROPERTY',
         entityId: p.id,
         propertyId: p.id,
-        performedBy: 'admin@esterra.io',
-        details: `Updated pricing details for "${p.title}"`,
+        performedBy: 'admin@zaraj.io',
+        details: `Updated pricing details for "${p.title}" (${p.city})`,
       },
     })
   }
