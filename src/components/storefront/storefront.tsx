@@ -143,12 +143,12 @@ export function Storefront({ onEnterAdmin }: { onEnterAdmin: () => void }) {
       <section id="top" className="relative flex min-h-screen items-center overflow-hidden pt-20">
         <div className="absolute inset-0">
           <img
-            src="/properties/hero.png"
-            alt="Luxury city skyline"
+            src="/hero-bg.png"
+            alt="PropertyAtlas global landmarks collage"
             className="h-full w-full object-cover"
-            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+            onError={(e) => { (e.target as HTMLImageElement).src = '/properties/hero.png' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/92 via-black/75 to-black/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         </div>
         <div className="relative mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
